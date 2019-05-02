@@ -8,12 +8,9 @@
 
   <!-- Define a traditional camel context here -->
   <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
-    <route id="simple-route">
-      <from id="route-timer" uri="timer:foo?period=2000"/>
-      <transform id="route-transform">
-        <method ref="myTransformer"/>
-      </transform>
-      <log id="route-log" message=">>> ${body}"/>
+    <route>
+      <from uri="jetty:http://0.0.0.0:9080/contacts?matchOnUriPrefix=true"/>
+      <to uri="jetty:https://www.google.com/m8/feeds/contacts/default/full?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
     </route>
   </camelContext>
 
